@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chaotic Joke Generator</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      overflow: hidden;
+      transition: background-color 0.5s;
+    }
+
+    .volume-notice {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background: #ffc107;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-weight: bold;
+      color: #000;
+      z-index: 1000;
+    }
+
+    #jokeDisplay {
+      position: absolute;
+      max-width: 60%;
+      padding: 20px;
+      background: #fff;
+      border-radius: 15px;
+      font-size: 24px;
+      text-align: center;
+      transition: transform 0.7s ease-in-out;
+      z-index: 10;
+    }
+
+    #generateBtn {
+      position: absolute;
+      padding: 15px 25px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      transition: background-color 0.4s ease;
+      z-index: 10;
+    }
+
+    #generateBtn:hover {
+      background-color: #0056b3;
+    }
+
+    .emoji {
+      position: absolute;
+      font-size: 2rem;
+      animation: fall 5s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-100px) rotate(0deg); }
+      100% { transform: translateY(110vh) rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="volume-notice">🔊 Volume Up!</div>
+
+<div id="jokeDisplay">Click the button for a joke!</div>
+<button id="generateBtn">Generate Dad Joke</button>
+
+<audio id="soundEffect">
+  <source src="https://www.fesliyanstudios.com/play-mp3/387" type="audio/mpeg">
+</audio>
+
+<script>
+  const dadJokes = [
+    "I'm afraid for the calendar. Its days are numbered.",
+    "Why did the scarecrow win an award? Because he was outstanding in his field.",
+    "I only know 25 letters of the alphabet. I don't know y.",
+    "Did you hear the rumor about butter? Well, I'm not going to spread it!",
+    "Why don't skeletons fight each other? They don't have the guts."
+  ];
+
+  const puns = [
+    "I’d tell you a chemistry joke but I know I wouldn’t get a reaction.",
+    "I used to be a baker, but I couldn't make enough dough.",
+    "The guy who invented Lifesavers candy made a mint!",
+    "My leaf blower doesn’t work—it just leaves.",
+    "Time flies like an arrow. Fruit flies like a banana."
+  ];
+
+  const oneLiners = [
+    "I told my wife she was drawing her eyebrows too high. She looked surprised.",
+    "I threw a boomerang a few years ago. I now live in constant fear.",
+    "I asked my dog what’s two minus two. He said nothing.",
+    "What’s orange and sounds like a parrot? A carrot.",
+    "Parallel lines have so much in common… it’s a shame they’ll never meet."
+  ];
+
+  const categories = [
+    { name: "Dad Joke", list: dadJokes },
+    { name: "Pun", list: puns },
+    { name: "One-Liner", list: oneLiners }
+  ];
+
+  const colors = ["#FFADAD", "#FFD6A5", "#FDFFB6", "#CAFFBF", "#9BF6FF", "#A0C4FF", "#BDB2FF", "#FFC6FF"];
+  const emojis = ["😂", "🤣", "🧠", "🤯", "🥸", "🎉", "🙃", "👴", "🧀"];
+  const jokeDisplay = document.getElementById('jokeDisplay');
+  const button = document.getElementById('generateBtn');
+  const sound = document.getElementById('soundEffect');
+
+  function getRandom(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  function moveElement(elem, avoidRect = null) {
+    const maxWidth = window.innerWidth - elem.offsetWidth;
+    const maxHeight = window.innerHeight - elem.offsetHeight;
+    let x, y;
+
+    do {
+      x = Math.random() * maxWidth;
+      y = Math.random() * maxHeight;
+    } while (
+      avoidRect &&
+      x < avoidRect.right &&
+      x + elem.offsetWidth > avoidRect.left &&
+      y < avoidRect.bottom &&
+      y + elem.offsetHeight > avoidRect.top
+    );
+
+    elem.style.left = `${x}px`;
+    elem.style.top = `${y}px`;
+  }
+
+  function updateJoke() {
+    const category = getRandom(categories);
+    const joke = getRandom(category.list);
+    button.textContent = `Generate ${category.name}`;
+    jokeDisplay.textContent = joke;
+
+    // Play sound
+    sound.currentTime = 0;
+    sound.play();
+
+    // Change background color
+    document.body.style.backgroundColor = getRandom(colors);
+
+    // Random flip
+    const flip = Math.random() > 0.5 ? "rotate(180deg)" : "rotate(0deg)";
+    jokeDisplay.style.transform = `translate(-50%, -50%) ${flip}`;
+
+    // Move joke to safe area
+    moveElement(jokeDisplay);
+
+    // Move button to a location that doesn't overlap with the joke
+    const jokeRect = jokeDisplay.getBoundingClientRect();
+    moveElement(button, jokeRect);
+
+    // Drop emojis
+    for (let i = 0; i < 10; i++) {
+      const emoji = document.createElement("div");
+      emoji.className = "emoji";
+      emoji.textContent = getRandom(emojis);
+      emoji.style.left = Math.random() * 100 + "vw";
+      emoji.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      document.body.appendChild(emoji);
+      setTimeout(() => emoji.remove(), 5000);
+    }
+  }
+
+  // Initial center alignment
+  window.onload = () => {
+    jokeDisplay.style.left = "50%";
+    jokeDisplay.style.top = "40%";
+    jokeDisplay.style.transform = "translate(-50%, -50%)";
+    button.style.left = "50%";
+    button.style.top = "60%";
+    button.style.transform = "translate(-50%, -50%)";
+  };
+
+  button.addEventListener('click', updateJoke);
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+

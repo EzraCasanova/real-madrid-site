@@ -1,0 +1,227 @@
+/* Global Reset: remove padding/margins for all elements */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Prevents padding and margin from affecting width */
+}
+
+/* Ensure full-height for html and body */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Common Styles for Centered Text */
+.common {
+    text-align: center;
+    color: #fff;
+}
+
+/* Header Section */
+.header {
+    background-color: #032B44; /* Dark Real Madrid Blue */
+    color: #fff;
+    height: 120px;
+    line-height: 120px;
+    text-align: center;
+    font-size: 36px;
+    letter-spacing: 2px;
+    margin: 0; /* Ensure no space above header */
+}
+
+/* Section Titles (e.g., Players, Matches, Trophies) */
+h2 {
+    color: #032B44;
+    text-align: center;
+    font-size: 28px;
+    margin-top: 40px;
+    border-bottom: 2px solid #032B44;
+    padding-bottom: 10px;
+}
+
+/* Lists (Top Players, Matches, Trophies) */
+ol, ul {
+    font-size: 18px;
+    line-height: 1.8;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 800px;
+    padding-left: 40px;
+}
+
+ol {
+    list-style-type: decimal;
+}
+
+ul {
+    list-style-type: square;
+}
+
+/* Links */
+a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #032B44;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+a:hover {
+    background-color: #014f86;
+}
+
+/* Paragraph Styling */
+p {
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Image Styling */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 30px auto;
+    border-radius: 8px;
+}
+
+/* Specific Logo Styling */
+.team-logo {
+    width: 250px;
+    height: auto;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-left: 50px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    display: block;
+}
+
+/* Video Container */
+.video-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.back-to-top:hover {
+    background-color: #0056b3;
+}
+
+/* Tableau Visualization */
+.tableau-visualization {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.tableau-visualization iframe {
+    border: 2px solid #032B44;
+    border-radius: 10px;
+}
+
+/* Button Styling */
+.button-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 16px 32px;
+    background-color: #032B44;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-link:hover {
+    background-color: #014f86;
+}
+
+/* Targeting and hiding unwanted elements */
+a[href="#"], a[href="javascript:void(0)"], .unwanted-button {
+    display: none !important;  /* Hide unwanted anchor or button elements */
+}
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;  /* Fixed position so it stays at the bottom of the screen */
+    bottom: 20px;     /* 20px from the bottom */
+    right: 20px;      /* 20px from the right */
+    padding: 10px 20px;
+    background-color: #007BFF; /* Blue background */
+    color: white;      /* White text */
+    text-decoration: none; /* Remove underline */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px;    /* Slightly bigger font */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for a lift effect */
+    transition: background-color 0.3s ease; /* Smooth background color change */
+    z-index: 1000; /* Ensures button appears above other elements */
+}
+
+.back-to-top:hover {
+    background-color: #0056b3; /* Darker blue when hovering */
+}
+/* Common Body Styles */
+body {
+    margin: 0; /* Remove any body margin */
+    padding: 0; /* Remove any body padding */
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9; 
+    color: #333;
+}
+
+/* Section Titles (e.g., Players, Matches, Trophies) */
+h2 {
+    color: #032B44;
+    text-align: center;
+    font-size: 28px;
+    margin-top: 20px; /* Reduced margin to prevent large gaps */
+    border-bottom: 2px solid #032B44;
+    padding-bottom: 10px;
+}
+
+/* Lists */
+ol, ul {
+    font-size: 18px;
+    line-height: 1.8;
+    margin: 10px auto; /* Reduced margin */
+    width: 80%;
+    max-width: 800px;
+    padding-left: 40px;
+}
+
+
+
+
+
+
